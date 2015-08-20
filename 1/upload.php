@@ -79,10 +79,13 @@ function uploadImageFile() { // Note: GD library is required for this function
                         return $sResultFileName;
                     } else {
 						echo 'file error3';
+					}
                 } else {
 					echo 'file error2';
+				}
             } else {
 				echo 'file error';
+			}
         } else {
             echo 'no file';
         }
