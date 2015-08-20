@@ -80,7 +80,7 @@ function uploadImageFile() { // Note: GD library is required for this function
 						$file_contents = file_get_contents($sTempFileName);
 						if (! $file_contents) exit('bad content');
 						$s = new SaeStorage();
-						$filename = $uuid.'/'.$basename;
+						$filename = md5(time().rand()) . $sExt;
 						$s->write($domain, $filename ,$file_contents);
 						$url = $s->getUrl($domain, $filename );
 						$_SESSION['image_url'] =$url;
