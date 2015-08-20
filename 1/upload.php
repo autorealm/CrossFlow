@@ -37,6 +37,15 @@ function uploadImageFile() { // Note: GD library is required for this function
                             @unlink($sTempFileName);
                             return;
                         }
+						$domain = 'uploades';
+						$file_contents = file_get_contents($sResultFileName);
+						if (! $file_contents) exit('bad content');
+						$s = new SaeStorage();
+						$filename = md5(time().rand()) . $sExt;
+						$s->write($domain, $filename ,$file_contents);
+						$url = $s->getUrl($domain, $filename );
+						echo $s->getAttr($domain,$filename);
+						return $url;
 
                         // check for image type
                         switch($aSize[2]) {
@@ -75,16 +84,6 @@ function uploadImageFile() { // Note: GD library is required for this function
                         // output image to file
                         imagejpeg($vDstImg, $sResultFileName, $iJpgQuality);
                         //@unlink($sTempFileName);
-						
-						$domain = 'uploades';
-						$file_contents = file_get_contents($sResultFileName);
-						if (! $file_contents) exit('bad content');
-						$s = new SaeStorage();
-						$filename = md5(time().rand()) . $sExt;
-						$s->write($domain, $filename ,$file_contents);
-						$url = $s->getUrl($domain, $filename );
-						$_SESSION['image_url'] =$url;
-						echo $s->getAttr($domain,$filename);
                         return $url;
                     } else {
 						echo 'file error3';
@@ -102,7 +101,7 @@ function uploadImageFile() { // Note: GD library is required for this function
 }
 
 $sImage = uploadImageFile();
-echo '<img src="'.$sImage.'" />';
+echo $sImage;
 
 class sae_upload{
 	public $domain="upload";//”Ú
