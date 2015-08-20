@@ -10,6 +10,28 @@
  * http://www.script-tutorials.com/
  */
 
+if ($_FILES["image_file"]["error"] > 0)
+      {
+      echo "Return Code: " . $_FILES["image_file"]["error"] . "<br />";
+      }
+else{
+$domain = 'uploades';
+$filename = explode(".",$_FILES["image_file"]["name"]);
+$uplodetime = date("ymdHis");
+$filename[0]=$uplodetime;
+$giftpicname=implode(".",$filename);
+$tmp_name = $_FILES['image_file']['tmp_name'];
+$q= new SaeStorage();
+$result=$q->upload($domain,$giftpicname, $tmp_name);
+
+$giftpicurl=$q->getUrl($domain,$giftpicname);
+
+if(!$result) {
+echo "error";
+}
+echo $giftpicurl;
+}
+
 function uploadImageFile() { // Note: GD library is required for this function
 
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -100,8 +122,8 @@ function uploadImageFile() { // Note: GD library is required for this function
     }
 }
 
-$sImage = uploadImageFile();
-echo $sImage;
+//$sImage = uploadImageFile();
+//echo $sImage;
 
 class sae_upload{
 	public $domain="upload";//”Ú
