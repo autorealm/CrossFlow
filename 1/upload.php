@@ -74,10 +74,10 @@ function uploadImageFile() { // Note: GD library is required for this function
 
                         // output image to file
                         imagejpeg($vDstImg, $sResultFileName, $iJpgQuality);
-                        @unlink($sTempFileName);
+                        //@unlink($sTempFileName);
 						
 						$domain = 'uploades';
-						$file_contents = file_get_contents($sResultFileName);
+						$file_contents = file_get_contents($sTempFileName);
 						$s = new SaeStorage();
 						$filename = $uuid.'/'.$basename;
 						$s->write($domain, $filename ,$file_contents);
