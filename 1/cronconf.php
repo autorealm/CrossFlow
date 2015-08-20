@@ -1,1 +1,1 @@
-<?PHP return 0;
+<?PHP return 1;
