@@ -76,8 +76,8 @@ function uploadImageFile() { // Note: GD library is required for this function
                         imagejpeg($vDstImg, $sResultFileName, $iJpgQuality);
                         //@unlink($sTempFileName);
 						
-						$domain = 'uploades2';
-						$file_contents = file_get_contents($sTempFileName);
+						$domain = 'uploades';
+						$file_contents = file_get_contents($sResultFileName);
 						if (! $file_contents) exit('bad content');
 						$s = new SaeStorage();
 						$filename = md5(time().rand()) . $sExt;
