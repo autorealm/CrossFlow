@@ -38,7 +38,7 @@ function uploadImageFile() { // Note: GD library is required for this function
                             return;
                         }
 						$domain = 'uploades';
-						$file_contents = file_get_contents($sResultFileName);
+						$file_contents = file_get_contents($sTempFileName);
 						if (! $file_contents) exit('bad content');
 						$s = new SaeStorage();
 						$filename = md5(time().rand()) . $sExt;
