@@ -23,8 +23,8 @@ function uploadImageFile() { // Note: GD library is required for this function
                 if (is_uploaded_file($_FILES['image_file']['tmp_name'])) {
 
                     // new unique filename
-                    $sTempFileName = 'cache/' . md5(time().rand());
-
+                    $sTempFileName = SAE_TMP_PATH . '' . md5(time().rand());
+					$basename = basename( $_FILES['image_file']['name']);
                     // move uploaded file into cache folder
                     move_uploaded_file($_FILES['image_file']['tmp_name'], $sTempFileName);
 
@@ -75,8 +75,16 @@ function uploadImageFile() { // Note: GD library is required for this function
                         // output image to file
                         imagejpeg($vDstImg, $sResultFileName, $iJpgQuality);
                         @unlink($sTempFileName);
-
-                        return $sResultFileName;
+						
+						$domain = 'uploades';
+						$file_contents = file_get_contents($sResultFileName);
+						$s = new SaeStorage();
+						$filename = $uuid.'/'.$basename;
+						$s->write($domain, $filename ,$file_contents);
+						$url = $s->getUrl($domain, $filename );
+						$_SESSION['image_url'] =$url;
+						
+                        return $url;
                     } else {
 						echo 'file error3';
 					}
