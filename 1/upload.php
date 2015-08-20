@@ -19,7 +19,7 @@ function uploadImageFile() { // Note: GD library is required for this function
         if ($_FILES) {
 
             // if no errors and size less than 250kb
-            if (! $_FILES['image_file']['error'] && $_FILES['image_file']['size'] < 250 * 1024) {
+            if (! $_FILES['image_file']['error'] && $_FILES['image_file']['size'] < 10240 * 1024) {
                 if (is_uploaded_file($_FILES['image_file']['tmp_name'])) {
 
                     // new unique filename
@@ -77,9 +77,14 @@ function uploadImageFile() { // Note: GD library is required for this function
                         @unlink($sTempFileName);
 
                         return $sResultFileName;
-                    }
-                }
-            }
+                    } else {
+						echo 'file error3';
+                } else {
+					echo 'file error2';
+            } else {
+				echo 'file error';
+        } else {
+            echo 'no file';
         }
     }
 }
