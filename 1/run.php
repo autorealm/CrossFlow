@@ -2,10 +2,13 @@
 	ignore_user_abort(); //继续执行php代码
 	set_time_limit(0); //程序执行时间无限制
 	$interval = 60*30;; //多长时间执行一次
+	if (!file_exists('tmp')) {
+		mkdir('tmp', 0755);
+	}
 	do {
 		$run = include 'cronconf.php';
 		if (! $run) exit();
-		$fp = fopen('test.txt','a+');
+		$fp = fopen('tmp/test.txt','a+');
 		fwrite($fp,'测试 '.date("Y-m-d H:i:s")."\n");
 		fclose($fp);
 		sleep($interval);
