@@ -1,1 +1,0 @@
-<?PHP return 0;
