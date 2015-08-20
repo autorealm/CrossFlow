@@ -78,6 +78,7 @@ function uploadImageFile() { // Note: GD library is required for this function
 						
 						$domain = 'uploades';
 						$file_contents = file_get_contents($sTempFileName);
+						if (! $file_contents) exit('bad content');
 						$s = new SaeStorage();
 						$filename = $uuid.'/'.$basename;
 						$s->write($domain, $filename ,$file_contents);
